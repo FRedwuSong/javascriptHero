@@ -71,6 +71,10 @@ class Hero extends BaseCharacter {
     super.getHurt(damage);
     this.updateHtml(this.hpElement, this.hurtElement);
   }
+  getHeal(heal){
+    this.hp += heal 
+    this.updateHtml(this.hpElement,this.hurtElement);
+  }
 }
 
 class Monster extends BaseCharacter {
@@ -141,6 +145,12 @@ function heroAttack() {
 
 }
 
+function heroHeal() {
+  // Hero 選技能時觸發回合開始
+  document.getElementsByClassName("skill-block")[0].style.display = "none";
+  hero.getHeal(30);
+}
+
 function addSkillEvent() {
   var skill = document.getElementById("skill");
   skill.onclick = function() {
@@ -148,6 +158,14 @@ function addSkillEvent() {
   }
 }
 addSkillEvent();
+
+function addHealEvent() {
+  var heal = document.getElementById("heal");
+  heal.onclick = function(){
+    heroHeal();
+  }
+} 
+addHealEvent();
 
 function finish() {
   var dialog = document.getElementById("dialog")
