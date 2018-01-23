@@ -81,13 +81,13 @@ class Hero extends BaseCharacter {
 
     _this.id = setInterval(function() {
 
-      _this.element.getElementsByClassName("hurt-text")[0].classList.add("healed");
-      _this.element.getElementsByClassName("hurt-text")[0].innerHTML = heal;
-      _this.element.getElementsByClassName("hurt-text")[0].style.color = "green";
+      _this.element.getElementsByClassName("heal-text")[0].classList.add("healed");
+      _this.element.getElementsByClassName("heal-text")[0].innerHTML = heal;
+      _this.element.getElementsByClassName("heal-text")[0].style.color = "green";
 
     setTimeout(function() {
-      _this.element.getElementsByClassName("hurt-text")[0].classList.remove("healed");
-      _this.element.getElementsByClassName("hurt-text")[0].textContent = "";
+      _this.element.getElementsByClassName("heal-text")[0].classList.remove("healed");
+      _this.element.getElementsByClassName("heal-text")[0].textContent = "";
       clearInterval(_this.id);
       }, 500);
     }); 
