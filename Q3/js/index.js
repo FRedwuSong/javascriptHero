@@ -193,10 +193,6 @@ function heroHeal() {
       finish();
     }
   }, 1100);
-
-
-  
-
 }
 
 function addSkillEvent() {
