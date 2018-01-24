@@ -142,7 +142,7 @@
 #hero-image-block    .character-block .heal-text{
   position: absolute;
   font-size: 60px;
-  color: red;
+  color: green;
   width: 100%;
   left: 0px;
   bottom: 50px;

@@ -78,23 +78,29 @@ class Hero extends BaseCharacter {
     this.updateHtml(this.hpElement,this.hurtElement);
 
     var _this = this;
+    var i = 1;
 
+    _this.element.getElementsByClassName("heal-text")[0].classList.add("healing");
+    _this.element.getElementsByClassName("heal-text")[0].ineerHTML = heal;
+    
     _this.id = setInterval(function() {
-
-      _this.element.getElementsByClassName("heal-text")[0].classList.add("healed");
-      _this.element.getElementsByClassName("heal-text")[0].innerHTML = heal;
-      _this.element.getElementsByClassName("heal-text")[0].style.color = "green";
-
-    setTimeout(function() {
-      _this.element.getElementsByClassName("heal-text")[0].classList.remove("healed");
-      _this.element.getElementsByClassName("heal-text")[0].textContent = "";
-      clearInterval(_this.id);
-      }, 500);
-    }); 
+        
+      _this.element.getElementsByClassName("effect-image")[0].style.display = "block";
+      _this.element.getElementsByClassName("effect-image")[0].src = 'images/effect/heal/' + i + '.png';
+      i++;
+      
+      if (i > 8) {
+        _this.element.getElementsByClassName("effect-image")[0].style.display = "none";
+        _this.element.getElementsByClassName("heal-text")[0].classList.remove("healing");
+        _this.element.getElementsByClassName("heal-text")[0].textContent = "";
+        clearInterval(_this.id);
+      }
+    }, 50);
+    
   }
 }
 
-class Monster extends BaseCharacter {
+class Monster extends BaseCharacter{
   constructor(name, hp, ap) {
     super(name, hp, ap);
 
@@ -165,7 +171,32 @@ function heroAttack() {
 function heroHeal() {
   // Hero 選技能時觸發回合開始
   document.getElementsByClassName("skill-block")[0].style.display = "none";
-  hero.getHeal(30);
+  
+  setTimeout(function() {
+    hero.element.classList.add("healing");
+    setTimeout(function() {
+      hero.getHeal(30);
+      hero.element.classList.remove("healing");
+    }, 500);
+  }, 100);
+  setTimeout(function() {
+    if (hero.alive) {
+      setTimeout(function() {
+        endTurn();
+        if (hero.alive == false) {
+          finish();
+        } else {
+          document.getElementsByClassName("skill-block")[0].style.display = "block";
+        }
+      }, 500);
+    } else {
+      finish();
+    }
+  }, 1100);
+
+
+  
+
 }
 
 function addSkillEvent() {
